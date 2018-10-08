@@ -61,6 +61,8 @@ RUN source scl_source enable rh-python36 && \
     fix-permissions ${APP_ROOT} -P && \
     rpm-file-permissions
 
+#RUN pip3 install --upgrade && pip3 install git+https://github.com/pypa/pipenv.git
+
 USER 1001
 
 # Set the default CMD to print the usage of the language image.
