@@ -42,7 +42,7 @@ if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
 fi
 
 if [[ ! -z "$ENABLE_PIPENV" ]]; then
-  install_pipenv
+  #install_pipenv
   echo "---> Installing dependencies via pipenv ..."
   if [[ -f Pipfile ]]; then
     pipenv install --deploy
