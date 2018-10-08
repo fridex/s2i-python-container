@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: python-36-centos-buildconfig
+objects:
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      name: python-36-centos7
+      labels:
+        app: thoth
+    spec:
+      output:
+        to:
+          kind: ImageStreamTag
+          name: "python-36-centos7:latest"
+      source:
+        type: Git
+        git:
+          uri: 'https://github.com/fridex/s2i-python-container'
+          ref: master
+        contextDir: './3.6'
+      resources:
+        limits:
+          memory: '512Mi'
+          cpu: '500m'
+        requests:
+          memory: '512Mi'
+          cpu: '500m'
+      strategy:
+        type: Docker
+        dockerStrategy:
+          dockerfilePath: './Dockerfile'
+      triggers:
+        - type: ImageChange
+          imageChange: {}
+
+  - kind: ImageStream
+    apiVersion: v1
+    metadata:
+      labels:
+        app: thoth
+      name: python-36-centos7
+    spec:
+      name: latest
+      lookupPolicy:
+        local: true
